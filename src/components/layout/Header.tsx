@@ -27,8 +27,6 @@ export function Header() {
   const isHomePage = pathname === "/";
   const showTransparentHeader = isHomePage && !isScrolled && !isOpen;
 
-
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);

@@ -22,7 +22,7 @@ const products = [
   {
     id: "3",
     name: "Emerald Velvet Lehenga",
-    price: 4000,
+    price: 2000,
     image: "https://images.unsplash.com/photo-1668371679302-a8ec781e876e?q=80&w=687&auto=format&fit=crop",
   },
   {
@@ -56,7 +56,7 @@ export function ProductTease() {
       {/* Mobile Horizontal Scroll / Desktop Grid */}
       <div className="mb-5">
          <span className=" text-copper uppercase tracking-[0.2em] text-2xl">
-            New Arrivals!!
+            Coming soon!!
           </span>
       </div>
     

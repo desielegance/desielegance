@@ -36,14 +36,14 @@ export async function POST(req: Request) {
         // Send Welcome Email
         const subject = "Welcome to Desi Elegance! 🌿";
         const html = `
-      <div style="font-family: 'Times New Roman', serif; color: #333; padding: 40px; background-color: #f9f8f6; text-align: center;">
+      <div style="font-family: 'Times New Roman', serif; color: #333; padding: 30px; background-color: #f9f8f6; text-align: center;">
         <div style="max-width: 600px; margin: auto; background: #ffffff; padding: 40px; border: 1px solid #e5e5e5;">
           <h1 style="color: #1a1a1a; letter-spacing: 2px; margin-bottom: 20px;">DESI ELEGANCE</h1>
           <p style="font-size: 16px; line-height: 1.6; color: #555;">
             Welcome to the Desi Elegance family!
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #555;">
-            Thank you for subscribing to our newsletter. You've just unlocked exclusive access to our latest collections, styling tips, and special offers tailored just for you.
+            Thank you for subscribing to our newsletter. You've just unlocked exclusive access to our latest collections, coupons, styling tips, and special offers tailored just for you.
           </p>
           <p style="font-size: 16px; line-height: 1.6; color: #555; margin-top: 30px;">
             We are thrilled to have you with us on this journey of timeless beauty and tradition.

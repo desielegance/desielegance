@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Product, Coupon } from "@/types";
 import { ProductForm } from "@/components/admin/ProductForm";
 import { CouponForm } from "@/components/admin/CouponForm";
@@ -9,14 +9,21 @@ import { Button } from "@/components/ui/Button";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { Plus, Edit, Trash2, X, Tag, Mail } from "lucide-react";
 import Image from "next/image";
-import ToasterUi from "toaster-ui";
+
 
 export default function AdminPage() {
   // Product State
   const [products, setProducts] = useState<Product[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-  const toaster = new ToasterUi();
+  const toasterRef = useRef<any>(null);
+
+  useEffect(() => {
+    import("toaster-ui").then((mod) => {
+      const ToasterUi = mod.default;
+      toasterRef.current = new ToasterUi();
+    });
+  }, []);
 
   // Newsletter State
   const [isSubscribersModalOpen, setIsSubscribersModalOpen] = useState(false);
@@ -83,10 +90,10 @@ export default function AdminPage() {
       if (res.ok) {
         setProducts((prev) => prev.filter((p) => p.id !== id));
       } else {
-        toaster.addToast("Failed to delete product", "error");
+        toasterRef.current?.addToast("Failed to delete product", "error");
       }
     } catch (error) {
-      toaster.addToast("Error deleting product", "error");
+      toasterRef.current?.addToast("Error deleting product", "error");
     }
   };
 
@@ -106,10 +113,10 @@ export default function AdminPage() {
         setIsModalOpen(false);
         fetchProducts(); // Refresh list
       } else {
-        toaster.addToast("Failed to save product", "error");
+        toasterRef.current?.addToast("Failed to save product", "error");
       }
     } catch (error) {
-      toaster.addToast("Error saving product", "error");
+      toasterRef.current?.addToast("Error saving product", "error");
     } finally {
       setIsLoading(false);
     }
@@ -138,10 +145,10 @@ export default function AdminPage() {
       if (res.ok) {
         setCoupons((prev) => prev.filter((c) => c.id !== id));
       } else {
-        toaster.addToast("Failed to delete coupon", "error");
+        toasterRef.current?.addToast("Failed to delete coupon", "error");
       }
     } catch (error) {
-      toaster.addToast("Error deleting coupon", "error");
+      toasterRef.current?.addToast("Error deleting coupon", "error");
     }
   };
 
@@ -161,10 +168,10 @@ export default function AdminPage() {
         setIsCouponModalOpen(false);
         fetchCoupons(); // Refresh list
       } else {
-        toaster.addToast("Failed to save coupon", "error");
+        toasterRef.current?.addToast("Failed to save coupon", "error");
       }
     } catch (error) {
-      toaster.addToast("Error saving coupon", "error");
+      toasterRef.current?.addToast("Error saving coupon", "error");
     } finally {
       setIsLoading(false);
     }
