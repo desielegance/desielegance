@@ -34,8 +34,7 @@ const ProductSchema: Schema<IProduct> = new Schema(
         caption: {
             type: String,
             required: [true, 'Please provide a caption'],
-            trim: true,
-            maxlength: [30, 'Caption cannot be more than 30 characters'],
+            trim: true
         },
         description: {
             type: String,
