@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
-import { productService } from '@/services/productService';
+import { couponService } from '@/services/couponService';
 
-export const dynamic = 'force-dynamic'; // Ensure this route is not statically cached effectively for dev
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
     try {
-        const products = await productService.getAllProducts();
-        return NextResponse.json(products);
+        const coupons = await couponService.getAllCoupons();
+        return NextResponse.json(coupons);
     } catch (error) {
         return NextResponse.json(
             { error: 'Internal Server Error' },
@@ -18,8 +18,8 @@ export async function GET() {
 export async function POST(request: Request) {
     try {
         const body = await request.json();
-        const newProduct = await productService.createProduct(body);
-        return NextResponse.json(newProduct, { status: 201 });
+        const newCoupon = await couponService.createCoupon(body);
+        return NextResponse.json(newCoupon, { status: 201 });
     } catch (error) {
         return NextResponse.json(
             { error: 'Internal Server Error' },

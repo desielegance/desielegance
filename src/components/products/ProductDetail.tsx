@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Heart, 
-  ShoppingBag, 
-  ChevronLeft, 
-  ChevronRight, 
+import {
+  Heart,
+  ShoppingBag,
+  ChevronLeft,
+  ChevronRight,
   CreditCard,
   Truck,
   ShieldCheck,
@@ -25,6 +26,7 @@ const SIZES = ["S", "M", "L", "XL", "2XL"];
 import { useCart } from "@/context/CartContext";
 
 export function ProductDetail({ product }: { product: Product }) {
+  const router = useRouter();
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState("S");
   const [openAccordion, setOpenAccordion] = useState<string | null>("description");
@@ -35,6 +37,13 @@ export function ProductDetail({ product }: { product: Product }) {
   const handleIncrement = () => updateQuantity(product.id, quantity + 1, selectedSize);
   const handleDecrement = () => updateQuantity(product.id, quantity - 1, selectedSize);
   const handleAddToCart = () => addToCart(product, selectedSize);
+
+  const handleBuyNow = () => {
+    if (quantity === 0) {
+      addToCart(product, selectedSize);
+    }
+    router.push("/cart");
+  };
 
   const nextImage = () => {
     setCurrentImageIndex((prev) => (prev + 1) % product.images.length);
@@ -52,7 +61,7 @@ export function ProductDetail({ product }: { product: Product }) {
     <div className="min-h-screen bg-ivory pt-24 pb-20 md:pt-32">
       <div className="container mx-auto px-0 md:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          
+
           {/* LEFT COLUMN - IMAGES */}
           <div className="col-span-1 lg:col-span-7 lg:col-start-1">
             {/* Mobile Slider */}
@@ -77,14 +86,14 @@ export function ProductDetail({ product }: { product: Product }) {
               </AnimatePresence>
 
               {/* Mobile Controls */}
-              <button 
+              <button
                 onClick={prevImage}
                 className="absolute left-4 top-1/2 -translate-y-1/2 bg-ivory/80 backdrop-blur-sm p-2 rounded-full shadow-sm text-obsidian hover:bg-ivory transition-colors z-10"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={20} />
               </button>
-              <button 
+              <button
                 onClick={nextImage}
                 className="absolute right-4 top-1/2 -translate-y-1/2 bg-ivory/80 backdrop-blur-sm p-2 rounded-full shadow-sm text-obsidian hover:bg-ivory transition-colors z-10"
                 aria-label="Next image"
@@ -95,12 +104,12 @@ export function ProductDetail({ product }: { product: Product }) {
               {/* Dots */}
               <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
                 {product.images.map((_, idx) => (
-                  <div 
-                    key={idx} 
+                  <div
+                    key={idx}
                     className={cn(
                       "h-1.5 w-1.5 rounded-full transition-all duration-300",
                       idx === currentImageIndex ? "bg-obsidian w-4" : "bg-obsidian/30"
-                    )} 
+                    )}
                   />
                 ))}
               </div>
@@ -128,7 +137,7 @@ export function ProductDetail({ product }: { product: Product }) {
           {/* RIGHT COLUMN - DETAILS */}
           <div className="col-span-1 lg:col-span-5 relative px-6 md:px-0">
             <div className="sticky top-32 space-y-8">
-              
+
               {/* Header */}
               <div className="space-y-4">
                 <h1 className="font-serif text-3xl md:text-4xl text-obsidian uppercase tracking-wide">
@@ -138,12 +147,12 @@ export function ProductDetail({ product }: { product: Product }) {
                   <span className="font-mono text-xl text-obsidian/80">
                     ₹ {product.price.toLocaleString("en-IN")}.00
                   </span>
-                  
+
                   <div className="flex items-center gap-2 text-copper animate-pulse">
                     <span className="text-xs font-medium uppercase tracking-wider">
                       <ViewerCount />
                     </span>
-                    <Eye height={16} width={16}/>
+                    <Eye height={16} width={16} />
                     {/* <div className="h-2 w-2 rounded-full bg-copper" /> */}
                   </div>
                 </div>
@@ -179,44 +188,45 @@ export function ProductDetail({ product }: { product: Product }) {
               <div className="space-y-4">
                 <div className="flex flex-col gap-4">
                   {quantity > 0 ? (
-                       /* Quantity Control (Green Number style per request) in Detail Page */
-                      <div className="flex h-14 w-full items-center justify-between border border-obsidian/20 rounded-none px-4 bg-ivory">
-                        <button
-                          onClick={handleDecrement}
-                          className="h-10 w-10 flex items-center justify-center text-obsidian/60 hover:text-obsidian hover:bg-obsidian/5 transition-colors rounded-sm"
-                        >
-                          <Minus size={20} />
-                        </button>
-                        
-                        <span className="font-mono text-2xl font-bold text-green-700">{quantity}</span>
-                        
-                        <button
-                          onClick={handleIncrement}
-                          className="h-10 w-10 flex items-center justify-center text-obsidian/60 hover:text-obsidian hover:bg-obsidian/5 transition-colors rounded-sm"
-                        >
-                          <Plus size={20} />
-                        </button>
-                      </div>
+                    /* Quantity Control (Green Number style per request) in Detail Page */
+                    <div className="flex h-14 w-full items-center justify-between border border-obsidian/20 rounded-none px-4 bg-ivory">
+                      <button
+                        onClick={handleDecrement}
+                        className="h-10 w-10 flex items-center justify-center text-obsidian/60 hover:text-obsidian hover:bg-obsidian/5 transition-colors rounded-sm"
+                      >
+                        <Minus size={20} />
+                      </button>
+
+                      <span className="font-mono text-2xl font-bold text-green-700">{quantity}</span>
+
+                      <button
+                        onClick={handleIncrement}
+                        className="h-10 w-10 flex items-center justify-center text-obsidian/60 hover:text-obsidian hover:bg-obsidian/5 transition-colors rounded-sm"
+                      >
+                        <Plus size={20} />
+                      </button>
+                    </div>
                   ) : (
-                    <Button 
-                      variant="primary" 
-                      size="lg" 
+                    <Button
+                      variant="primary"
+                      size="lg"
                       onClick={handleAddToCart}
-                      className="flex-1 h-14 uppercase tracking-[0.2em] text-sm md:text-base bg-obsidian text-ivory hover:bg-copper hover:border-copper transition-all duration-300"
+                      className="flex-1 h-14 uppercase tracking-[0.2em] text-xl md:text-base bg-obsidian text-ivory hover:bg-copper hover:border-copper transition-all duration-300"
                     >
                       Add to Cart
                     </Button>
                   )}
-                  
-                  <Button 
-                    variant="primary" 
-                    size="lg" 
-                    className="flex-1 h-14 uppercase tracking-[0.2em] text-sm md:text-base bg-obsidian text-ivory hover:bg-copper hover:border-copper transition-all duration-300 opacity-60 hover:opacity-100"
+
+                  <Button
+                    variant="primary"
+                    size="lg"
+                    onClick={handleBuyNow}
+                    className="flex-1 h-14 uppercase tracking-[0.2em] text-xl md:text-base bg-obsidian text-ivory hover:bg-copper hover:border-copper transition-all duration-300 opacity-60 hover:opacity-100"
                   >
                     Buy Now
                   </Button>
                 </div>
-                
+
                 <div className="flex items-center gap-2 justify-center md:justify-start text-xs font-medium text-obsidian/60 tracking-wider uppercase">
                   <Truck size={14} />
                   <span>Cash on Delivery Available
@@ -228,9 +238,9 @@ export function ProductDetail({ product }: { product: Product }) {
 
               {/* Accordions */}
               <div className="border-t border-obsidian/10 pt-4 space-y-2">
-                
-                <AccordionItem 
-                  title="Description" 
+
+                <AccordionItem
+                  title="Description"
                   isOpen={openAccordion === "description"}
                   onClick={() => toggleAccordion("description")}
                 >
@@ -239,8 +249,8 @@ export function ProductDetail({ product }: { product: Product }) {
                   </p>
                 </AccordionItem>
 
-                <AccordionItem 
-                  title="Wash Care Instructions" 
+                <AccordionItem
+                  title="Wash Care Instructions"
                   isOpen={openAccordion === "care"}
                   onClick={() => toggleAccordion("care")}
                 >
@@ -252,13 +262,13 @@ export function ProductDetail({ product }: { product: Product }) {
                   </ul>
                 </AccordionItem>
 
-                <AccordionItem 
-                  title="Shipping & Returns" 
+                <AccordionItem
+                  title="Shipping & Returns"
                   isOpen={openAccordion === "shipping"}
                   onClick={() => toggleAccordion("shipping")}
                 >
-                   <p className="font-light leading-relaxed text-obsidian/80">
-                    Free shipping on orders over ₹2000. Easy returns within 7 days of delivery.
+                  <p className="font-light leading-relaxed text-obsidian/80">
+                    Free shipping on all orders. Please inspect items at delivery—no returns accepted after delivery.
                   </p>
                 </AccordionItem>
 
@@ -272,15 +282,15 @@ export function ProductDetail({ product }: { product: Product }) {
   );
 }
 
-function AccordionItem({ title, isOpen, onClick, children }: { 
-  title: string; 
-  isOpen: boolean; 
-  onClick: () => void; 
-  children: React.ReactNode 
+function AccordionItem({ title, isOpen, onClick, children }: {
+  title: string;
+  isOpen: boolean;
+  onClick: () => void;
+  children: React.ReactNode
 }) {
   return (
     <div className="border-b border-obsidian/10 last:border-0">
-      <button 
+      <button
         onClick={onClick}
         className="flex w-full items-center justify-between py-4 text-left group"
       >

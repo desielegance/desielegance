@@ -6,6 +6,25 @@ export interface Product {
     description: string;
 }
 
+export interface Coupon {
+    id: string;
+    name: string;
+    discount: number;
+}
+
+export const MOCK_COUPONS: Coupon[] = [
+    {
+        id: "1",
+        name: "WELCOME10",
+        discount: 10,
+    },
+    {
+        id: "2",
+        name: "SUMMERSALE",
+        discount: 25,
+    },
+];
+
 export const MOCK_PRODUCTS: Product[] = [
     {
         id: "9",

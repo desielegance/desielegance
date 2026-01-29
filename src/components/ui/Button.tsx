@@ -62,11 +62,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     if (href) {
       return (
         <Link href={href} className={combinedClassName}>
-          {/* We wrap inner content in a motion.span to allow for click animations if needed, 
-              but for Links, usually we just animate the container or use a motion.a if we want gestures.
-              To keep it simple and consistent, we'll just style the link. 
-          */}
-          {content}
+          <motion.span
+            className="flex items-center justify-center w-full h-full gap-2"
+            whileTap={{ scale: 0.98 }}
+          >
+            {content}
+          </motion.span>
         </Link>
       );
     }

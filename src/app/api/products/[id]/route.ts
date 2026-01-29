@@ -18,7 +18,56 @@ export async function GET(
 
         return NextResponse.json(product);
     } catch (error) {
-        console.error(`Error fetching product with id:`, error);
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
+    }
+}
+
+export async function PUT(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params;
+        const body = await request.json();
+        const updatedProduct = await productService.updateProduct(id, body);
+
+        if (!updatedProduct) {
+            return NextResponse.json(
+                { error: 'Product not found' },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json(updatedProduct);
+    } catch (error) {
+        console.error('Error updating product:', error);
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
+    }
+}
+
+export async function DELETE(
+    request: Request,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const { id } = await params;
+        const deletedProduct = await productService.deleteProduct(id);
+
+        if (!deletedProduct) {
+            return NextResponse.json(
+                { error: 'Product not found' },
+                { status: 404 }
+            );
+        }
+
+        return NextResponse.json({ message: 'Product deleted successfully' });
+    } catch (error) {
         return NextResponse.json(
             { error: 'Internal Server Error' },
             { status: 500 }

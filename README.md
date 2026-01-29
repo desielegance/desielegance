@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Desi Elegance
 
-## Getting Started
+**A Premium E-Commerce Experience for Indian Ethnic Wear.**
 
-First, run the development server:
+Desi Elegance is a minimalist, mobile-first e-commerce platform built with Next.js 15, designed to offer a seamless and aesthetic shopping experience for premium clothing. It emphasizes visual storytelling, frictionless navigation, and a direct-to-WhatsApp checkout flow.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Key Features
+
+*   **🎨 Premium Aesthetic**: Custom design system using Ivory, Obsidian, and Copper tones for a sophisticated look.
+*   **📱 Mobile-First Experience**: Optimized for touch interactions with smooth scrolling and tactile feedback.
+*   **🛍️ Frictionless Shopping**: Guest checkout system—no account creation required.
+*   **💬 WhatsApp Integration**: Direct order placement via WhatsApp with pre-formatted order details.
+*   **🔒 Secure Admin Dashboard**: 
+    *   Password-protected admin area with specialized Session Hashing security.
+    *   Instant kill-switch for compromised sessions.
+    *   Product and Coupon management.
+*   **⚡ High Performance**: Built on Next.js 15 App Router with Framer Motion animations.
+
+## 🛠️ Tech Stack
+
+*   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
+*   **Language**: TypeScript
+*   **Styling**: Tailwind CSS (Custom Theme)
+*   **Database**: MongoDB
+*   **Animations**: Framer Motion
+*   **Icons**: Lucide React
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+*   Node.js 18+ installed
+*   MongoDB Atlas account (or local instance)
+*   Cloudinary account
+
+### Environment Variables
+
+Create a `.env` file in the root directory with the following variables:
+
+```env
+# Database
+MONGODB_URL=your_mongodb_connection_string
+
+# Cloudinary (Image Optimization)
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=your_cloud_name
+
+# Email Service (Newsletter)
+EMAIL_ID=your_email@example.com
+EMAIL_PASSWORD=your_app_specific_password
+
+# Admin Security
+ADMIN_PASSWORD=your_secure_master_password
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1.  Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/desi-elegance.git
+    cd desi-elegance
+    ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  Install dependencies:
+    ```bash
+    npm install
+    ```
 
-## Learn More
+3.  Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-To learn more about Next.js, take a look at the following resources:
+4.  Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 📂 Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+├── app/               # Next.js App Router pages and API routes
+├── components/        # Reusable UI components
+│   ├── cart/          # Cart and Checkout components
+│   ├── landing/       # Homepage sections (Hero, Story, etc.)
+│   ├── layout/        # Header, Footer
+│   ├── products/      # Product cards and lists
+│   └── ui/            # Generic UI elements (Button, Input)
+├── context/           # React Context (CartContext)
+├── lib/               # Utilities, Database connection, Auth helpers
+├── models/            # Mongoose models (Product, Coupon)
+└── services/          # Business logic (ProductService)
+```
 
-## Deploy on Vercel
+## 🛡️ Security Note
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The Admin Panel is protected by a custom **Session Hashing** mechanism. 
+- Sessions are valid for 7 days by default.
+- Changing the `ADMIN_PASSWORD` in `.env` immediately invalidates all active sessions, providing a security "kill switch".
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+Built with ❤️ by Desi Elegance Team

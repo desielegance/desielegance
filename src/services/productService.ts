@@ -1,5 +1,5 @@
 import dbConnect from '@/lib/db';
-import Product, { IProduct } from '@/models/product';
+import Product from '@/models/product';
 import { MOCK_PRODUCTS } from '@/lib/data';
 
 export class ProductService {
@@ -14,7 +14,6 @@ export class ProductService {
             // Check if we need to seed
             const count = await Product.countDocuments();
             if (count === 0) {
-                console.log('No products found, seeding database...');
                 await this.seedInitialData();
             }
 
@@ -22,8 +21,6 @@ export class ProductService {
             const products = await Product.find({}).sort({ createdAt: -1 }).lean();
             return products.map(this.mapDocToProduct);
         } catch (error) {
-            console.warn("Database connection failed or querying failed. Using MOCK_PRODUCTS fallback.");
-            // console.error(error); // Optional: log full error
             return MOCK_PRODUCTS;
         }
     }
@@ -48,8 +45,6 @@ export class ProductService {
             }
             return this.mapDocToProduct(product);
         } catch (error) {
-            console.warn(`Database connection failed or error fetching details for ID ${id}. Using MOCK_PRODUCTS fallback.`);
-            // console.error(error);
             const mock = MOCK_PRODUCTS.find(p => p.id === id);
             return mock || null;
         }
@@ -68,13 +63,31 @@ export class ProductService {
                 description: prod.description,
                 images: prod.images,
                 slug: prod.name.toLowerCase().replace(/ /g, '-'),
-                stock: 10, // Default stock
+                stock: 0, // Default stock
                 category: 'Clothing'
             };
         });
 
         await Product.insertMany(seedOperations);
-        console.log('Database seeded successfully.');
+    }
+
+    async createProduct(data: any) {
+        await dbConnect();
+        const newProduct = new Product(data);
+        const savedProduct = await newProduct.save();
+        return this.mapDocToProduct(savedProduct.toObject());
+    }
+
+    async updateProduct(id: string, data: any) {
+        await dbConnect();
+        const updatedProduct = await Product.findByIdAndUpdate(id, data, { new: true }).lean();
+        return updatedProduct ? this.mapDocToProduct(updatedProduct) : null;
+    }
+
+    async deleteProduct(id: string) {
+        await dbConnect();
+        const deletedProduct = await Product.findByIdAndDelete(id).lean();
+        return deletedProduct ? this.mapDocToProduct(deletedProduct) : null;
     }
 
     /**

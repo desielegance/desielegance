@@ -7,9 +7,8 @@ export default function ViewerCount() {
 
   useEffect(() => {
     const generate = () =>
-      setViewCount((prev) =>
-        Math.max(1, Math.min(100, (prev ?? 20) + (Math.random() > 0.5 ? 1 : -1)))
-      );
+      setViewCount(Math.floor(Math.random() * 100) + 1);
+
 
     generate(); // initial client-only value
 

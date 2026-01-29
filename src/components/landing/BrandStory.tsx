@@ -30,7 +30,7 @@ export function BrandStory() {
             rhythm of modern life.
           </p>
           <div className="pt-4">
-             <Button onClick={()=>{router.push('/about')}} variant="outline">Read Our Story</Button>
+             <Button onClick={()=>{router.push('/pages/about')}} variant="outline">Read Our Story</Button>
           </div>
         </motion.div>
 

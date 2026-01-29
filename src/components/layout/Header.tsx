@@ -7,19 +7,27 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 
 const navLinks = [
   { name: "Collections", href: "/products" },
-  { name: "Our Story", href: "/about" },
-  { name: "Journal", href: "/journal" },
+  { name: "Our Story", href: "/pages/about" },
+  { name: "Inquiry?", href: "https://wa.me/917278304949?text=Ask%20any%20inquiry%20you%20have.%20We%20will%20respond%20to%20you%20within%20one%20hour." },
 ];
+
+
 
 export function Header() {
   const router = useRouter();
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  const isHomePage = pathname === "/";
+  const showTransparentHeader = isHomePage && !isScrolled && !isOpen;
+
+
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,11 +37,14 @@ export function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Hide Navbar on Admin pages
+  if (pathname && pathname.startsWith("/admin")) return null;
+
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
-        isScrolled
+        !showTransparentHeader
           ? "bg-ivory/95 backdrop-blur-md border-b border-obsidian/5 py-2"
           : "bg-transparent py-6"
       )}
@@ -42,25 +53,31 @@ export function Header() {
         {/* Mobile Menu Button (Left) */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden text-obsidian p-1 focus:outline-none z-[120]"
+          className={cn(
+            "md:hidden p-1 focus:outline-none z-[120]",
+            !showTransparentHeader ? "text-obsidian" : "text-ivory"
+          )}
           aria-label="Toggle menu"
         >
           {isOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
 
         {/* Logo (Center on Mobile, Left on Desktop) */}
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="flex items-center gap-2 md:gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 z-[110]"
         >
-          <Image 
-            src="/logo.png" 
-            alt="Desi Elegance" 
+          <Image
+            src="/logo.svg"
+            alt="Desi Elegance"
             height={40}
             width={40}
-            className="object-contain" 
+            className={cn("object-contain transition-all duration-300", !showTransparentHeader ? "" : "invert")}
           />
-          <span className="font-serif text-xl md:text-2xl font-medium tracking-tight text-obsidian whitespace-nowrap">
+          <span className={cn(
+            "font-serif text-xl md:text-2xl font-medium tracking-tight whitespace-nowrap transition-colors duration-300",
+            !showTransparentHeader ? "text-obsidian" : "text-ivory"
+          )}>
             Desi Elegance
           </span>
         </Link>
@@ -71,7 +88,10 @@ export function Header() {
             <Link
               key={link.name}
               href={link.href}
-              className="text-sm font-medium uppercase tracking-[0.2em] text-obsidian/80 hover:text-copper transition-colors"
+              className={cn(
+                "text-sm font-medium uppercase tracking-[0.2em] transition-colors hover:text-copper",
+                !showTransparentHeader ? "text-obsidian/80" : "text-ivory/80"
+              )}
             >
               {link.name}
             </Link>
@@ -84,7 +104,10 @@ export function Header() {
         {/* Cart Icon (Right) */}
         <div className="flex items-center gap-4 z-[110]">
           <Link href="/cart">
-            <button className="text-obsidian hover:text-copper transition-colors relative">
+            <button className={cn(
+              "hover:text-copper transition-colors relative",
+              !showTransparentHeader ? "text-obsidian" : "text-ivory"
+            )}>
               <ShoppingBag size={22} />
               <CartCountBadge />
             </button>
@@ -143,7 +166,7 @@ export function Header() {
 function CartCountBadge() {
   const { getCartCount } = useCart();
   const count = getCartCount();
-  
+
   if (count === 0) return null;
 
   return (

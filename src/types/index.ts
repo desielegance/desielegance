@@ -4,10 +4,16 @@ export interface Product {
     price: number;
     images: string[];
     description: string;
-    category?: string;
-    stock?: number;
+    category: string;
     slug?: string;
-    details?: Record<string, string>;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface Coupon {
+    id: string;
+    name: string;
+    discount: number;
     createdAt?: string;
     updatedAt?: string;
 }
