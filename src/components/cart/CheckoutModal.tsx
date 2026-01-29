@@ -73,7 +73,7 @@ export function CheckoutModal({
     message += `\nPlease share the QR code so I can pay the advance amount.`;
 
     // Encode and Open WhatsApp
-    const whatsappUrl = `https://wa.me/917278304949?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/919874112489?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
     
     // Optionally close modal or clear cart here if desired
