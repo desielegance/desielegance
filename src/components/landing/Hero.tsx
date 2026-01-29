@@ -78,11 +78,14 @@ export function Hero() {
 
           <motion.h1
             variants={itemVariants}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl text-ivory font-medium leading-tight tracking-tight"
+            className="flex flex-col items-center gap-2"
           >
-            Desi Spirit.
-            <br />
-            <span className="text-copper italic">Global Soul.</span>
+            <span className="font-serif text-5xl md:text-8xl lg:text-9xl text-white font-bold tracking-tight uppercase">
+              DESI SPIRIT
+            </span>
+            <span className="font-playlist text-5xl md:text-8xl lg:text-9xl text-[#C6A34F] tracking-wider">
+              Global Soul
+            </span>
           </motion.h1>
 
           <motion.p
@@ -95,7 +98,7 @@ export function Hero() {
 
           <motion.div variants={itemVariants} className="mt-8">
             <Button variant="primary" size="lg" className="min-w-[180px]"
-            onClick={() => router.push('/products')}>
+              onClick={() => router.push('/products')}>
               Explore Collection
             </Button>
           </motion.div>

@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { Facebook, Instagram, Twitter, Youtube, PhoneCall, Mail } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 
 export function Footer() {
@@ -82,10 +82,19 @@ export function Footer() {
           <div className="md:col-span-4 space-y-6">
             <h3 className="font-serif text-lg uppercase tracking-[0.2em] text-ivory/40">Contact Us</h3>
             <div className="space-y-4 text-ivory/80 font-light text-lg">
-              <p>+91 9874112489 </p>
-              <p> +91 7439505161</p>
-              <p>desielegance79@gmail.com</p>
-              <p className="uppercase text-sm tracking-wider opacity-70">Monday To Sunday 10 Am To 5 Pm</p>
+              <div className="flex items-center gap-3">
+                <PhoneCall size={20} className="text-ivory/60" />
+                <p>+91 9874112489</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <PhoneCall size={20} className="text-ivory/60" />
+                <p>+91 7439505161</p>
+              </div>
+              <div className="flex items-center gap-3">
+                <Mail size={20} className="text-ivory/60" />
+                <p>desielegance79@gmail.com</p>
+              </div>
+              <p className="uppercase text-sm tracking-wider opacity-70 pt-2 block">Monday To Sunday 10 Am To 5 Pm</p>
             </div>
           </div>
 

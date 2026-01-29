@@ -29,29 +29,29 @@ export function ProductGridWithFilter({ products }: ProductGridWithFilterProps) 
       {/* Header & Filter Bar */}
       <div className="container mx-auto px-6 mb-8">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="text-center md:text-left">
-                <span className="text-copper uppercase tracking-[0.2em] text-xl font-medium">
-                New Arrivals
-                </span>
-            </div>
+          <div className="text-center md:text-left">
+            <span className="text-copper uppercase tracking-[0.2em] text-xl font-medium">
+              New Arrivals
+            </span>
+          </div>
 
-            {/* Filter Dropdown */}
-            <div className="relative group min-w-[200px] z-10">
-                <div className="relative">
-                <select
-                    value={selectedCategory}
-                    onChange={(e) => setSelectedCategory(e.target.value)}
-                    className="w-full appearance-none bg-white border border-obsidian/20 rounded-none px-4 py-3 pr-10 text-obsidian font-serif focus:outline-none focus:border-obsidian cursor-pointer"
-                >
-                    {categories.map((cat) => (
-                    <option key={cat} value={cat as string}>
-                        {cat}
-                    </option>
-                    ))}
-                </select>
-                <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-obsidian/50 pointer-events-none" size={16} />
-                </div>
+          {/* Filter Dropdown */}
+          <div className="relative group min-w-[200px] z-10">
+            <div className="relative">
+              <select
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+                className="w-full appearance-none bg-white border border-obsidian/20 rounded-none px-4 py-3 pr-10 text-obsidian font-serif focus:outline-none focus:border-obsidian cursor-pointer"
+              >
+                {categories.map((cat) => (
+                  <option key={cat} value={cat as string}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-obsidian/50 pointer-events-none" size={16} />
             </div>
+          </div>
         </div>
       </div>
 

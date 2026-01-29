@@ -28,7 +28,7 @@ export function ProductCard({ id, name, price, image, category, className }: Pro
 
   const handleIncrement = () => updateQuantity(id, quantity + 1, selectedSize);
   const handleDecrement = () => updateQuantity(id, quantity - 1, selectedSize);
-  const handleAddToCart = () => addToCart({ id, name, price, images: [image], description: "", category }, selectedSize);
+  const handleAddToCart = () => addToCart({ id, name, price, images: [image], description: "", caption: "", category }, selectedSize);
 
   return (
     <div className={cn("group flex flex-col gap-4 ", className)}>

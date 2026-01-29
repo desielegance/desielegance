@@ -3,6 +3,7 @@ import mongoose, { Schema, Document, Model } from 'mongoose';
 export interface IProduct extends Document {
     name: string;
     description: string;
+    caption: string;
     price: number;
     // images can be an array of strings (URLs)
     images: string[];
@@ -29,6 +30,12 @@ const ProductSchema: Schema<IProduct> = new Schema(
             index: true,
             // We will auto-generate this in the service if not provided, 
             // or you can use a pre-save hook. For now, we'll keep it simple.
+        },
+        caption: {
+            type: String,
+            required: [true, 'Please provide a caption'],
+            trim: true,
+            maxlength: [30, 'Caption cannot be more than 30 characters'],
         },
         description: {
             type: String,

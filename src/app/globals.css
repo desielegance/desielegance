@@ -1,4 +1,12 @@
 @import "tailwindcss";
+@font-face{
+  font-family: 'Playlist Script';
+  src: url('/fonts/Playlist_Script.otf')
+  format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* Premium Minimalist Palette */

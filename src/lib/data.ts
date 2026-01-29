@@ -4,6 +4,7 @@ export interface Product {
     price: number;
     images: string[];
     description: string;
+    caption?: string;
 }
 
 export interface Coupon {
@@ -29,6 +30,7 @@ export const MOCK_PRODUCTS: Product[] = [
     {
         id: "9",
         name: "The Tunic red",
+        caption: "Ignite your presence",
         price: 1599,
         description: "Ignite your presence with the fire of creation and destruction. 100% cotton loop knit terry fabric, Weight- 240 GSM, Oversized fit, Ribbed crew neck collar.",
         images: [

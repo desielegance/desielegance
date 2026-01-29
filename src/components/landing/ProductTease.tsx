@@ -1,95 +1,94 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { SectionWrapper } from "@/components/ui/SectionWrapper";
-import { Button } from "@/components/ui/Button";
+import Link from "next/link";
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { useRouter } from "next/navigation";
-
-const products = [
-  {
-    id: "1",
-    name: "The Royal Muslin Set",
-    price: 2999,
-    image: "https://images.unsplash.com/photo-1764161148361-d8d87d000acf?q=80&w=687&auto=format&fit=crop",
-  },
-  {
-    id: "2",
-    name: "Patterned Apparel",
-    price: 1500,
-    image: "https://images.unsplash.com/photo-1768803968262-320d4752966f?q=80&w=687&auto=format&fit=crop",
-  },
-  {
-    id: "3",
-    name: "Emerald Velvet Lehenga",
-    price: 2000,
-    image: "https://images.unsplash.com/photo-1668371679302-a8ec781e876e?q=80&w=687&auto=format&fit=crop",
-  },
-  {
-    id: "4",
-    name: "Tunic Kurti",
-    price: 2500,
-    image: "https://images.unsplash.com/photo-1767785829193-191aae29045b?q=80&w=687&auto=format&fit=crop",
-  },
-];
+import { Button } from "@/components/ui/Button";
+import { Product } from "@/types";
 
 export function ProductTease() {
-  const router = useRouter();
+  const [recentProducts, setRecentProducts] = useState<Product[]>([]);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("/api/products");
+        if (res.ok) {
+          const data = await res.json();
+          // Take top 4 recent products
+          setRecentProducts(data.slice(0, 4));
+        }
+      } catch (error) {
+        console.error("Failed to fetch recent products", error);
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (recentProducts.length === 0) return null;
 
   return (
-    <SectionWrapper className="bg-sand text-obsidian overflow-hidden">
-      <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-        <div>
-          <span className="text-copper uppercase tracking-[0.2em] text-sm font-medium">
-            Curated For You
-          </span>
-          <h2 className="font-serif text-4xl md:text-5xl mt-2 font-light">
-            Signature Collection
-          </h2>
-        </div>
-        <Button variant="outline" className="border-obsidian/20 text-obsidian hover:bg-obsidian hover:text-ivory w-fit"
-        onClick={()=>{router.push('/products')}}>
-          View All <ArrowRight className="ml-2 w-4 h-4" />
-        </Button>
-      </div>
+    <div className="bg-sand text-obsidian py-20 px-6">
+      <div className="container mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 mb-16">
 
-      {/* Mobile Horizontal Scroll / Desktop Grid */}
-      <div className="mb-5">
-         <span className=" text-copper uppercase tracking-[0.2em] text-2xl">
-            Coming soon!!
-          </span>
-      </div>
-    
-      <div className="flex overflow-x-auto gap-6 pb-8 snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 md:grid md:grid-cols-4 md:overflow-visible scrollbar-hide">
-         
-        {products.map((product, index) => (
-          <motion.div
-            key={product.id}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            viewport={{ once: true }}
-            className="flex-none w-[75vw] md:w-auto snap-center group cursor-pointer"
-          >
-            <div className="relative aspect-[3/4] overflow-hidden bg-white/40 mb-4">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-obsidian/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                 <span className="bg-ivory text-obsidian px-6 py-3 uppercase text-xs tracking-widest font-medium backdrop-blur-sm">
-                    Quick View
-                 </span>
-              </div>
-            </div>
-            <h3 className="font-serif text-xl mb-1 group-hover:text-copper transition-colors font-medium">
-              {product.name}
+          {/* Recent Products List (Vertical Stack) */}
+          {/* Recent Products List (Vertical Stack) */}
+          {/* Recent Products List (Vertical Stack) */}
+          {/* Recent Products List (Vertical Stack) */}
+          <div className="flex flex-col gap-6 md:order-2 mt-0">
+
+            <h3 className="font-serif text-3xl font-bold uppercase tracking-widest text-obsidian text-center md:text-left border-b-2 border-copper w-fit mx-auto md:mx-0 pb-2 mb-2">
+              New Arrivals
             </h3>
-            <p className="text-obsidian/60 font-mono text-sm">₹ {product.price.toLocaleString("en-IN")}</p>
-          </motion.div>
-        ))}
+
+            {recentProducts.map((product, index) => (
+              <motion.div
+                key={product.id}
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1, ease: "backOut" }}
+                viewport={{ once: true, margin: "-50px" }}
+              >
+                <Link href={`/products/${product.id}`} className="group block cursor-pointer  bg-white shadow-xl hover:shadow-2xl transition-all duration-500 rounded-sm">
+                  {/* Image Thumbnail */}
+                  <div className="relative aspect-[3/4] w-full overflow-hidden bg-white/40 mb-4">
+                    <Image
+                      src={product.images[0]}
+                      alt={product.name}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                  </div>
+
+                  {/* Info */}
+                  <div className="text-center space-y-2 pb-2">
+                    <h3 className="font-serif text-3xl font-light text-obsidian group-hover:text-copper transition-colors">
+                      {product.name}
+                    </h3>
+                    <p className="font-mono text-lg text-obsidian/60">
+                      ₹ {product.price.toLocaleString("en-IN")}
+                    </p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Brand / Inspiration Text (Left Side to balance layout) */}
+          <div className="flex flex-col justify-between md:order-1 sticky top-32 h-fit space-y-10">
+              <Link href="/products">
+                <Button variant="outline" size="lg" className="border-obsidian text-obsidian hover:bg-obsidian hover:text-ivory uppercase tracking-widest">
+                  View All Collection <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+           
+          </div>
+
+        </div>
       </div>
-    </SectionWrapper>
+    </div>
   );
 }

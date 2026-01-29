@@ -61,6 +61,7 @@ export class ProductService {
                 name: prod.name,
                 price: prod.price,
                 description: prod.description,
+                caption: prod.caption || 'Elegant design',
                 images: prod.images,
                 slug: prod.name.toLowerCase().replace(/ /g, '-'),
                 stock: 0, // Default stock
@@ -73,6 +74,17 @@ export class ProductService {
 
     async createProduct(data: any) {
         await dbConnect();
+
+        // Auto-generate slug if missing
+        if (!data.slug && data.name) {
+            data.slug = data.name
+                .toLowerCase()
+                .trim()
+                .replace(/[^a-z0-9\s-]/g, '')
+                .replace(/[\s_-]+/g, '-')
+                .replace(/^-+|-+$/g, '') || `product-${Date.now()}`;
+        }
+
         const newProduct = new Product(data);
         const savedProduct = await newProduct.save();
         return this.mapDocToProduct(savedProduct.toObject());

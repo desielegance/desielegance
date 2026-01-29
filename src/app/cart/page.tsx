@@ -39,7 +39,7 @@ export default function CartPage() {
   const discountAmount = getDiscountAmount();
   const total = getFinalTotal();
 
-  const advanceAmount = Math.round(total * 0.25);
+  const advanceAmount = Math.round(total * 0.40);
 
   // Re-validate coupon on mount to ensure it still exists in DB
   useEffect(() => {
@@ -222,23 +222,19 @@ export default function CartPage() {
                     <span>- ₹ {discountAmount.toLocaleString("en-IN")}</span>
                   </div>
                 )}
-                <div className="flex justify-between">
-                  <span>Shipping Fee</span>
-                  <span className="text-green-700 uppercase font-medium text-xs">Free</span>
-                </div>
               </div>
 
-              {/* Coupon Section (75% / 25% Split) */}
+              {/* Coupon Section (60% / 40% Split) */}
               <div className="space-y-2">
                 {!appliedCoupon ? (
                   <div className="flex w-full h-12 border border-obsidian/20 rounded-sm overflow-hidden focus-within:border-obsidian transition-colors">
-                    <div className="relative w-[75%] bg-transparent flex items-center px-3 gap-2">
+                    <div className="relative w-[60%] bg-transparent flex items-center px-3 gap-2">
                       <Tag size={16} className="text-obsidian/40" />
                       <input
                         type="text"
                         value={couponCode}
                         onChange={(e) => setCouponCode(e.target.value)}
-                        placeholder="Have a Coupon?"
+                        placeholder="HAVE A COUPON?"
                         className="w-full bg-transparent outline-none text-sm font-light placeholder:text-obsidian/30 uppercase tracking-wide"
                         disabled={isApplying}
                         onKeyDown={(e) => e.key === 'Enter' && handleApplyCoupon()}
@@ -247,7 +243,7 @@ export default function CartPage() {
                     <button
                       onClick={handleApplyCoupon}
                       disabled={isApplying || !couponCode.trim()}
-                      className="w-[25%] bg-obsidian text-ivory text-xs font-bold uppercase tracking-widest hover:bg-copper transition-colors disabled:opacity-50"
+                      className="w-[40%] bg-gray-500 text-ivory text-sm font-bold uppercase tracking-widest hover:bg-gray-600 transition-colors disabled:opacity-50"
                     >
                       {isApplying ? "..." : "Apply"}
                     </button>

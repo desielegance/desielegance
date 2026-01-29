@@ -21,6 +21,7 @@ export async function POST(request: Request) {
         const newProduct = await productService.createProduct(body);
         return NextResponse.json(newProduct, { status: 201 });
     } catch (error) {
+        console.log(error);
         return NextResponse.json(
             { error: 'Internal Server Error' },
             { status: 500 }

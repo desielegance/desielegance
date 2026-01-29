@@ -17,6 +17,7 @@ interface ProductFormProps {
 type ProductFormData = {
   name: string;
   price: number;
+  caption: string;
   description: string;
   category: string;
   images: string[];
@@ -27,6 +28,7 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
   const [formData, setFormData] = useState<ProductFormData>({
     name: "",
     price: 0,
+    caption: "",
     description: "",
     category: "",
     images: [],
@@ -38,6 +40,7 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
       setFormData({
         name: initialData.name || "",
         price: initialData.price || 0,
+        caption: initialData.caption || "",
         description: initialData.description || "",
         category: initialData.category || "",
         images: initialData.images || [],
@@ -102,6 +105,18 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
             className="w-full p-2 border rounded focus:ring-2 focus:ring-obsidian outline-none"
           />
         </div>
+        
+        <div>
+          <label className="block text-sm font-medium mb-1">Caption</label>
+          <textarea
+            name="caption"
+            value={formData.caption}
+            onChange={handleChange}
+            required
+            rows={4}
+            className="w-full p-2 border rounded focus:ring-2 focus:ring-obsidian outline-none"
+          />
+        </div>
 
         <div>
           <label className="block text-sm font-medium mb-1">Description</label>
@@ -130,16 +145,16 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
 
       <div className="space-y-3">
         <label className="block text-sm font-medium">Product Images</label>
-        
+
         {/* Image Grid */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
           {formData.images.map((url, index) => (
             <div key={url} className="relative group aspect-[3/4] bg-gray-100 rounded-md overflow-hidden border">
-              <Image 
-                src={url} 
-                alt={`Product ${index + 1}`} 
-                fill 
-                className="object-cover" 
+              <Image
+                src={url}
+                alt={`Product ${index + 1}`}
+                fill
+                className="object-cover"
               />
               <button
                 type="button"
@@ -153,8 +168,8 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
 
           {/* Upload Button */}
           {formData.images.length < 4 && (
-            <CldUploadWidget 
-              uploadPreset="desi_elegance_upload" 
+            <CldUploadWidget
+              uploadPreset="desi_elegance_upload"
               onSuccess={handleUploadSuccess}
               options={{
                 maxFiles: 4 - formData.images.length,

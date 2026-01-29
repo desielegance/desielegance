@@ -35,7 +35,7 @@ export function CheckoutModal({
 
   if (!isOpen) return null;
 
-  const advanceAmount = Math.round(finalTotal * 0.25); // 25% Advance
+  const advanceAmount = Math.round(finalTotal * 0.40); // 40% Advance
 
   const handleConfirm = () => {
     // Basic Validation
@@ -47,7 +47,7 @@ export function CheckoutModal({
 
     // Construct WhatsApp Message
     let message = `Hello Desi Elegance, I would like to place an order:\n\n`;
-    
+
     message += `*Items:*\n`;
     cart.forEach((item, index) => {
       message += `${index + 1}. ${item.name} (${item.size}) - Rs. ${item.price}\n`;
@@ -61,9 +61,9 @@ export function CheckoutModal({
     message += `Final Price: Rs. ${finalTotal}\n`;
 
     message += `\n*Payment:*\n`;
-    message += `Advance Payable (25%): Rs. ${advanceAmount}\n`;
+    message += `Advance Payable (40%): Rs. ${advanceAmount}\n`;
     message += `Remaining Amount: Rs. ${finalTotal - advanceAmount}\n`;
-    
+
     // Explicitly mentioning Advance
     message += `\n*Customer Details:*\n`;
     message += `Name: ${formData.name}\n`;
@@ -75,7 +75,7 @@ export function CheckoutModal({
     // Encode and Open WhatsApp
     const whatsappUrl = `https://wa.me/919874112489?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
-    
+
     // Optionally close modal or clear cart here if desired
     // onClose(); 
   };
@@ -113,11 +113,19 @@ export function CheckoutModal({
 
             {/* Body */}
             <div className="p-6 space-y-6 overflow-y-auto min-h-0">
-              <div className="bg-sand/20 p-4 rounded-md border border-sand-dark/10">
-                <p className="text-sm text-obsidian/80 mb-1 font-medium">Payment Note:</p>
-                <p className="text-xs text-obsidian/70 leading-relaxed">
-                  To confirm your order, a minimal advance payment of <span className="font-bold text-obsidian">25% (₹{advanceAmount})</span> is required. The remaining amount (₹{finalTotal - advanceAmount}) will be payable upon delivery.
-                </p>
+              <div className="bg-sand/20 p-4 rounded-md border border-sand-dark/10 space-y-3">
+                <div className="space-y-1">
+                  <p className="text-sm text-obsidian/80 font-medium">Payment Note:</p>
+                  <p className="text-xs text-obsidian/70 leading-relaxed">
+                    To confirm your order, a minimal advance payment of <span className="font-bold text-obsidian">40% (₹{advanceAmount})</span> is required. The remaining amount (₹{finalTotal - advanceAmount}) will be payable upon delivery.
+                  </p>
+                </div>
+
+                <div className="pt-2 border-t border-obsidian/10">
+                  <p className="text-[10px] md:text-xs text-red-600/80 font-medium leading-relaxed italic">
+                    * Shipping charges may vary based on your location (₹60 - ₹100). Final shipping cost will be confirmed during order processing.
+                  </p>
+                </div>
               </div>
 
               <div className="space-y-4">
@@ -160,14 +168,14 @@ export function CheckoutModal({
 
             {/* Footer */}
             <div className="p-5 border-t border-obsidian/10 bg-gray-50 flex gap-3 shrink-0">
-              <Button 
-                variant="outline" 
+              <Button
+                variant="outline"
                 onClick={onClose}
                 className="flex-1 border-obsidian/20 h-12 uppercase tracking-wider text-xs font-bold"
               >
                 Cancel
               </Button>
-              <Button 
+              <Button
                 onClick={handleConfirm}
                 className="flex-[2] bg-green-700 hover:bg-green-800 text-white h-12 uppercase tracking-wider text-xs font-bold shadow-lg"
               >

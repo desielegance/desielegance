@@ -139,10 +139,12 @@ export function ProductDetail({ product }: { product: Product }) {
             <div className="sticky top-32 space-y-8">
 
               {/* Header */}
-              <div className="space-y-4">
-                <h1 className="font-serif text-3xl md:text-4xl text-obsidian uppercase tracking-wide">
+              <div className="flex flex-col">
+                <h1 className="font-serif text-3xl md:text-4xl text-obsidian uppercase tracking-wide leading-none mb-1">
                   {product.name}
                 </h1>
+                <p className="font-mono text-sm text-obsidian/60 tracking-wider mb-6">{product.caption}</p>
+
                 <div className="flex items-baseline justify-between border-b border-obsidian/10 pb-6">
                   <span className="font-mono text-xl text-obsidian/80">
                     ₹ {product.price.toLocaleString("en-IN")}.00
