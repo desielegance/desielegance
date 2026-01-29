@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Minus, Plus, X, ArrowRight, Tag } from "lucide-react";
@@ -8,7 +8,7 @@ import { useCart } from "@/context/CartContext";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
 import { CheckoutModal } from "@/components/cart/CheckoutModal";
-import ToasterUi from 'toaster-ui'
+
 
 export default function CartPage() {
   const {
@@ -26,7 +26,14 @@ export default function CartPage() {
   const [couponCode, setCouponCode] = useState("");
   const [isApplying, setIsApplying] = useState(false);
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const toaster = new ToasterUi();
+  const toasterRef = useRef<any>(null);
+
+  useEffect(() => {
+    import("toaster-ui").then((mod) => {
+      const ToasterUi = mod.default;
+      toasterRef.current = new ToasterUi();
+    });
+  }, []);
 
   const subtotal = getCartTotal();
   const discountAmount = getDiscountAmount();
@@ -47,7 +54,7 @@ export default function CartPage() {
           const data = await res.json();
           if (!res.ok || !data.valid) {
             removeCoupon();
-            toaster.addToast(`Coupon '${appliedCoupon.name}' is no longer valid.`, "error");
+            toasterRef.current?.addToast(`Coupon '${appliedCoupon.name}' is no longer valid.`, "error");
           }
         } catch (error) {
           // On network error we might choose to keep it or remove it. 
@@ -79,11 +86,11 @@ export default function CartPage() {
         applyCoupon(data.coupon);
         // Optional: clear input or keep it to show what's applied
       } else {
-        toaster.addToast("Coupon not valid", "error");
+        toasterRef.current?.addToast("Coupon not valid", "error");
         removeCoupon();
       }
     } catch (error) {
-      toaster.addToast("Something went wrong. Please try again after some time.", "error");
+      toasterRef.current?.addToast("Something went wrong. Please try again after some time.", "error");
     } finally {
       setIsApplying(false);
     }
