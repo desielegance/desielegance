@@ -6,6 +6,7 @@ import { X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CartItem, AppliedCoupon } from "@/context/CartContext";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -33,6 +34,7 @@ export function CheckoutModal({
   });
 
   const [error, setError] = useState("");
+  const [showRedPlaceholders, setShowRedPlaceholders] = useState(false);
 
   if (!isOpen) return null;
 
@@ -42,9 +44,11 @@ export function CheckoutModal({
     // Basic Validation
     if (!formData.name.trim() || !formData.address.trim() || !formData.contact.trim()) {
       setError("Please fill in all details to proceed.");
+      setShowRedPlaceholders(true);
       return;
     }
     setError("");
+    setShowRedPlaceholders(false);
 
     // Construct WhatsApp Message
     let message = `Hello Desi Elegance, I would like to place an order:\n\n`;
@@ -137,7 +141,7 @@ export function CheckoutModal({
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="e.g. Anjali Sharma"
-                    className="w-full bg-white border border-obsidian/20 p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif"
+                    className={cn("w-full bg-white border p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif", showRedPlaceholders && !formData.name.trim() ? "border-red-600 placeholder:text-red-600" : "border-obsidian/20")}
                   />
                 </div>
 
@@ -148,7 +152,7 @@ export function CheckoutModal({
                     value={formData.address}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
                     placeholder="Complete address with pincode"
-                    className="w-full bg-white border border-obsidian/20 p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif resize-none"
+                    className={cn("w-full bg-white border p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif resize-none", showRedPlaceholders && !formData.address.trim() ? "border-red-600 placeholder:text-red-600" : "border-obsidian/20")}
                   />
                 </div>
 
@@ -159,7 +163,7 @@ export function CheckoutModal({
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
                     placeholder="+91 98741 12489"
-                    className="w-full bg-white border border-obsidian/20 p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif"
+                    className={cn("w-full bg-white border p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif", showRedPlaceholders && !formData.contact.trim() ? "border-red-600 placeholder:text-red-600" : "border-obsidian/20")}
                   />
                 </div>
 
