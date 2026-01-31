@@ -60,7 +60,7 @@ export function Footer() {
           <div className="md:col-span-4 space-y-8">
             <Link href="/" className="block relative h-20 w-48">
               <Image
-                src="/logo.svg"
+                src="/logo1.svg"
                 alt="Desi Elegance"
                 fill
                 className="object-contain object-left invert" // Invert to make black logo white
