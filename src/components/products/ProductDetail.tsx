@@ -270,7 +270,7 @@ export function ProductDetail({ product }: { product: Product }) {
                   onClick={() => toggleAccordion("shipping")}
                 >
                   <p className="font-light leading-relaxed text-obsidian/80">
-                    Free shipping on all orders. Please inspect items at delivery—no returns accepted after delivery.
+                    Shipping charges vary by location. Please inspect items at delivery—no returns accepted after delivery.
                   </p>
                 </AccordionItem>
 

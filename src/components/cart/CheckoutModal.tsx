@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { CartItem, AppliedCoupon } from "@/context/CartContext";
+import Link from "next/link";
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -157,10 +158,18 @@ export function CheckoutModal({
                     type="tel"
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 98741 12489"
                     className="w-full bg-white border border-obsidian/20 p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif"
                   />
                 </div>
+
+                <p className="font-bold text-xs text-obsidian/60 leading-relaxed">
+                  Before placing the order we request you to kindly go through the{" "}
+                  <Link href="/pages/terms-conditions" target="_blank" rel="noopener noreferrer" className="text-copper underline hover:text-copper/80 transition-colors">
+                    terms and service
+                  </Link>{" "}
+                  of Desi Elegance.
+                </p>
               </div>
 
               {error && <p className="text-red-600 text-sm font-medium animate-pulse">{error}</p>}

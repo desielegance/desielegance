@@ -92,8 +92,7 @@ export function Hero() {
             variants={itemVariants}
             className="text-ivory/80 max-w-md md:max-w-xl text-lg md:text-xl font-light leading-relaxed tracking-wide"
           >
-            Redefining Indian fashion for the modern urban aesthete.
-            Timeless elegance meets contemporary rhythm.
+            Crafting uniquely elegant fashion rooted in culture and shaped for the modern world.
           </motion.p>
 
           <motion.div variants={itemVariants} className="mt-8">

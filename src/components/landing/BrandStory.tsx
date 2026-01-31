@@ -22,12 +22,11 @@ export function BrandStory() {
       <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
         <motion.div style={{ opacity, y }} className="space-y-8 order-2 md:order-1">
           <h2 className="font-serif text-4xl md:text-5xl text-obsidian font-light leading-tight">
-            Heritage Woven for the <span className="text-copper italic">Future</span>.
+            Where Heritage meets the <span className="text-copper italic">Now</span>.
           </h2>
           <p className="text-obsidian/70 text-lg leading-relaxed font-light tracking-wide">
-            We believe that tradition is not about looking back—it's about moving forward with deep roots. 
-            Each piece in our collection tells a story of craftsmanship, reimagined for the fast-paced 
-            rhythm of modern life.
+            We believe tradition isn’t about standing still—it’s about moving forward with purpose and pride.
+            Each piece in our collection is thoughtfully created to celebrate modesty, individuality, and refined elegance.
           </p>
           <div className="pt-4">
              <Button onClick={()=>{router.push('/pages/about')}} variant="outline">Read Our Story</Button>

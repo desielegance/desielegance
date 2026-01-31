@@ -18,7 +18,7 @@ export default function About() {
               About Us
             </motion.h1>
           </div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -37,27 +37,23 @@ export default function About() {
       {/* Brand Story Section */}
       <SectionWrapper className="py-6 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto text-center flex flex-col gap-8">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-2xl md:text-4xl font-serif uppercase tracking-widest text-obsidian"
           >
-            Young Stylish Modern
+            YOUNG. STYLISH. MODERN.
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl leading-relaxed text-obsidian/80 font-light"
           >
-            <span className="italic text-copper font-serif">Young stylish modern</span> defines 
-            the Desi Elegance brand that tells the story of a <span className="italic text-copper font-serif">new age Indian woman</span> who 
-            is free spirited, independent and aware. Our constant endeavour is to provide a fashionable, 
-            stylish, upbeat collection of <span className="italic text-copper font-serif">ethnic and fusion wear</span> carefully 
-            curated in line with fashion trends worldwide.
+            <span className="italic text-copper font-serif">Young Stylish Modern</span> defines Desi Elegance — a brand that celebrates the story of the <span className="italic text-copper font-serif">New Age Indian Woman</span>: free-spirited, independent, and aware. Our constant endeavour is to offer a fashionable, stylish, and uplifting collection of <span className="italic text-copper font-serif">ethnic and fusion wear</span>, thoughtfully curated in harmony with global fashion trends.
           </motion.p>
         </div>
       </SectionWrapper>
@@ -65,7 +61,7 @@ export default function About() {
       {/* Philosophy Section */}
       <SectionWrapper className="py-16 md:py-24 bg-sand/30">
         <div className="max-w-3xl mx-auto text-center flex flex-col gap-10">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -73,8 +69,8 @@ export default function About() {
           >
             PHILOSOPHY
           </motion.h2>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -82,20 +78,19 @@ export default function About() {
             className="space-y-6 text-lg md:text-xl font-light text-obsidian/80"
           >
             <p>
-              We believe in <span className="text-copper">Stories for Seasons</span>, 
-              personal style over trends, and comfort that never compromises on elegance.
+              We believe in stories for every season, personal style over passing trends, and comfort that never compromises on elegance.
             </p>
             <p>
-              Every piece is crafted with respect for tradition but designed for the momentum of modern life.
+              Each piece is crafted with deep respect for tradition while embracing the momentum of modern expression. Our designs balance heritage and contemporary aesthetics, creating clothing that feels timeless, effortless, and distinctly you.
             </p>
           </motion.div>
         </div>
       </SectionWrapper>
 
-            {/* Brand Story Section */}
+      {/* Brand Story Section */}
       <SectionWrapper className="py-16 md:py-24 bg-white">
         <div className="max-w-4xl mx-auto text-center flex flex-col gap-8">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -103,15 +98,15 @@ export default function About() {
           >
             BRAND FORTE
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
             className="text-lg md:text-xl leading-relaxed text-obsidian/80 font-light"
           >
-            <span className="italic text-copper font-serif">Kurtas</span> are our forte, but our upcoming collection of bottom wear and dupattas will allow you to mix, match, and curate your perfect ensemble. 
+            <span className="italic text-copper font-serif">Kurtis</span> are our forte, but our upcoming collection of bottom wear and dupattas will allow you to mix, match, and curate your perfect ensemble.
           </motion.p>
         </div>
       </SectionWrapper>

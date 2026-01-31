@@ -5,7 +5,7 @@ export default function Loading() {
     <div className="fixed inset-0 z-[200] flex flex-col items-center justify-center bg-ivory">
       <div className="relative animate-pulse">
         <Image
-          src="/logo.svg"
+          src="/logo1.svg"
           alt="Desi Elegance"
           width={80}
           height={80}

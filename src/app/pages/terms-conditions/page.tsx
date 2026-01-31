@@ -81,12 +81,11 @@ export default function TermsAndConditions() {
                                 <li>COD is available across selected pin codes in India.</li>
                                 <li>
                                     <strong className="text-obsidian">
-                                        25% of the total cart value must be prepaid
+                                        40% of the total cart value must be prepaid
                                     </strong>{" "}
                                     at the time of order placement.
                                 </li>
                                 <li>The remaining amount is payable on delivery.</li>
-                                <li>COD orders are non-refundable.</li>
                             </ul>
                         </div>
                     </section>
