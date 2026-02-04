@@ -13,7 +13,7 @@ import { useCart } from "@/context/CartContext";
 const navLinks = [
   { name: "Collections", href: "/products" },
   { name: "Our Story", href: "/pages/about" },
-  { name: "Inquiry?", href: "https://wa.me/919874112489?text=Ask%20any%20inquiry%20you%20have.%20We%20will%20respond%20to%20you%20within%20one%20hour." },
+  { name: "Inquiry?", href: "https://wa.me/919874112489" },
 ];
 
 
