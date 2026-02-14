@@ -16,8 +16,6 @@ const navLinks = [
   { name: "Inquiry?", href: "https://wa.me/919874112489" },
 ];
 
-
-
 export function Header() {
   const router = useRouter();
   const pathname = usePathname();
