@@ -7,9 +7,6 @@ import { useRouter } from "next/navigation";
 
 const heroImages = [
   "./1.jpg",
-  "./2.avif",
-  "./3.avif",
-  "./4.avif"
 ];
 
 export function Hero() {
