@@ -42,7 +42,7 @@ export default function AdminLogin() {
             <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-xl border border-obsidian/10 space-y-8">
                 <div className="text-center space-y-4">
                     <div className="relative h-16 w-16 mx-auto">
-                        <Image src="/logo.svg" alt="Logo" fill className="object-contain" />
+                        <Image src="/logo1.svg" alt="Logo" fill className="object-contain" />
                     </div>
                     <h1 className="font-serif text-2xl text-obsidian uppercase tracking-widest">Admin Access</h1>
                     <p className="text-obsidian/50 text-sm font-light">Enter your master password to continue.</p>

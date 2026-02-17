@@ -42,7 +42,7 @@ export function Header() {
         "fixed top-0 left-0 right-0 z-[100] transition-all duration-500",
         !showTransparentHeader
           ? "bg-ivory/95 backdrop-blur-md border-b border-obsidian/5 py-2"
-          : "bg-transparent py-5"
+          : "bg-transparent py-5 md:py-3"
       )}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -64,13 +64,41 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 md:gap-3 absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0 z-[110]"
         >
-          <Image
-            src="/logo.svg"
-            alt="Desi Elegance"
-            height={70}
-            width={200}
-            className={cn("object-contain transition-all duration-300", !showTransparentHeader ? "" : "invert")}
-          />
+          {/* Mobile Logo: Keeps original behavior */}
+          <div className="md:hidden">
+            <Image
+              src="/logo.svg"
+              alt="Desi Elegance"
+              height={70}
+              width={200}
+              className={cn(
+                "object-contain transition-all duration-300",
+                !showTransparentHeader ? "" : "invert"
+              )}
+            />
+          </div>
+
+          {/* Desktop Logo: Icon + Text */}
+          <div className="hidden md:flex items-center gap-1">
+            <Image
+              src="/logo1.svg"
+              alt="Desi Elegance Icon"
+              height={50}
+              width={50}
+              className={cn(
+                "object-contain transition-all duration-300",
+                showTransparentHeader ? "h-[40px] w-auto" : "h-[40px] w-auto",
+                !showTransparentHeader ? "" : "invert"
+              )}
+            />
+            <span className={cn(
+              "font-serif tracking-[0.05em] font-semibold transition-colors duration-300",
+              showTransparentHeader ? "text-lg" : "text-lg",
+              !showTransparentHeader ? "text-obsidian" : "text-ivory"
+            )}>
+              DESI ELEGANCE
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}
