@@ -65,6 +65,7 @@ export function ProductGridWithFilter({ products }: ProductGridWithFilterProps) 
                 id={product.id}
                 name={product.name}
                 price={product.price}
+                slashPrice={product.slashPrice}
                 image={product.images[0]}
                 category={product.category}
               />

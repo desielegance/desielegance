@@ -12,6 +12,7 @@ interface ProductCardProps {
   id: string;
   name: string;
   price: number;
+  slashPrice?: number;
   image: string;
   category: string;
   className?: string;
@@ -19,7 +20,7 @@ interface ProductCardProps {
 
 const SIZES = ["S", "M", "L", "XL"];
 
-export function ProductCard({ id, name, price, image, category, className }: ProductCardProps) {
+export function ProductCard({ id, name, price, slashPrice, image, category, className }: ProductCardProps) {
   const [selectedSize, setSelectedSize] = useState<string>("S");
   const { addToCart, updateQuantity, getItemQuantity } = useCart();
 
@@ -57,9 +58,23 @@ export function ProductCard({ id, name, price, image, category, className }: Pro
               {name}
             </Link>
           </h3>
-          <p className="font-mono text-sm text-obsidian/60 tracking-wider">
-            ₹ {price.toLocaleString("en-IN")}
-          </p>
+          {slashPrice && slashPrice > price ? (
+            <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span className="font-mono text-sm text-obsidian/60 tracking-wider">
+                ₹ {price.toLocaleString("en-IN")}
+              </span>
+              <span className="font-mono text-xs text-obsidian/40 line-through">
+                ₹{slashPrice.toLocaleString("en-IN")}
+              </span>
+              <span className="text-xs font-semibold text-green-600">
+                ({Math.round(((slashPrice - price) / slashPrice) * 100)}% OFF)
+              </span>
+            </div>
+          ) : (
+            <p className="font-mono text-sm text-obsidian/60 tracking-wider">
+              ₹ {price.toLocaleString("en-IN")}
+            </p>
+          )}
         </div>
 
         {/* Size Selector */}

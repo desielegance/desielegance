@@ -17,6 +17,7 @@ interface ProductFormProps {
 type ProductFormData = {
   name: string;
   price: number;
+  slashPrice: number | "";
   caption: string;
   description: string;
   category: string;
@@ -28,6 +29,7 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
   const [formData, setFormData] = useState<ProductFormData>({
     name: "",
     price: 0,
+    slashPrice: "",
     caption: "",
     description: "",
     category: "",
@@ -40,6 +42,7 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
       setFormData({
         name: initialData.name || "",
         price: initialData.price || 0,
+        slashPrice: initialData.slashPrice || "",
         caption: initialData.caption || "",
         description: initialData.description || "",
         category: initialData.category || "",
@@ -69,13 +72,31 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
     }));
   };
 
+  // Calculate discount percentage for preview
+  const discountPercent =
+    formData.slashPrice !== "" &&
+      Number(formData.slashPrice) > Number(formData.price) &&
+      Number(formData.price) > 0
+      ? Math.round(
+        ((Number(formData.slashPrice) - Number(formData.price)) /
+          Number(formData.slashPrice)) *
+        100
+      )
+      : null;
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({
+    const submitData: any = {
       ...formData,
       price: parseFloat(formData.price.toString()),
-    });
-    console.log(formData);
+    };
+    // Send slashPrice as a number if filled, or null to clear it (undefined gets stripped by JSON.stringify)
+    if (formData.slashPrice !== "" && Number(formData.slashPrice) > 0) {
+      submitData.slashPrice = parseFloat(formData.slashPrice.toString());
+    } else {
+      submitData.slashPrice = null;
+    }
+    onSubmit(submitData);
   };
 
   return (
@@ -105,7 +126,34 @@ export function ProductForm({ initialData, onSubmit, onCancel, isLoading }: Prod
             className="w-full p-2 border rounded focus:ring-2 focus:ring-obsidian outline-none"
           />
         </div>
-        
+
+        <div>
+          <label className="block text-sm font-medium mb-1">
+            MRP / Slash Price (₹) <span className="text-obsidian/40 font-normal">— Optional</span>
+          </label>
+          <input
+            type="number"
+            name="slashPrice"
+            value={formData.slashPrice}
+            onChange={handleChange}
+            min="0"
+            placeholder="Original price before discount"
+            className="w-full p-2 border rounded focus:ring-2 focus:ring-obsidian outline-none"
+          />
+          {discountPercent !== null && (
+            <p className="mt-1.5 text-sm font-medium text-green-600">
+              ✓ Discount: {discountPercent}% OFF (₹{formData.price} selling vs ₹{formData.slashPrice} MRP)
+            </p>
+          )}
+          {formData.slashPrice !== "" &&
+            Number(formData.slashPrice) > 0 &&
+            Number(formData.slashPrice) <= Number(formData.price) && (
+              <p className="mt-1.5 text-sm text-amber-600">
+                ⚠ Slash price should be higher than the selling price
+              </p>
+            )}
+        </div>
+
         <div>
           <label className="block text-sm font-medium mb-1">Caption</label>
           <textarea

@@ -146,9 +146,23 @@ export function ProductDetail({ product }: { product: Product }) {
                 <p className="font-serif text-sm text-obsidian/60 tracking-wider mb-6">{product.caption}</p>
 
                 <div className="flex items-baseline justify-between border-b border-obsidian/10 pb-6">
-                  <span className="font-mono text-xl text-obsidian/80">
-                    ₹ {product.price.toLocaleString("en-IN")}.00
-                  </span>
+                  {product.slashPrice && product.slashPrice > product.price ? (
+                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="font-mono text-xl text-obsidian/80">
+                        ₹ {product.price.toLocaleString("en-IN")}
+                      </span>
+                      <span className="font-mono text-sm text-obsidian/40 line-through">
+                        ₹{product.slashPrice.toLocaleString("en-IN")}
+                      </span>
+                      <span className="text-sm font-semibold text-green-600">
+                        ({Math.round(((product.slashPrice - product.price) / product.slashPrice) * 100)}% OFF)
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="font-mono text-xl text-obsidian/80">
+                      ₹ {product.price.toLocaleString("en-IN")}.00
+                    </span>
+                  )}
 
                   <div className="flex items-center gap-2 text-copper animate-pulse">
                     <span className="text-xs font-medium uppercase tracking-wider">

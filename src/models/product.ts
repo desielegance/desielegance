@@ -5,6 +5,7 @@ export interface IProduct extends Document {
     description: string;
     caption: string;
     price: number;
+    slashPrice?: number;
     // images can be an array of strings (URLs)
     images: string[];
     category?: string;
@@ -44,6 +45,10 @@ const ProductSchema: Schema<IProduct> = new Schema(
             type: Number,
             required: [true, 'Please provide a price'],
             min: [0, 'Price cannot be negative'],
+        },
+        slashPrice: {
+            type: Number,
+            required: false,
         },
         images: {
             type: [String],
