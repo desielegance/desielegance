@@ -78,7 +78,7 @@ export function CheckoutModal({
     message += `\nPlease share the QR code so I can pay the advance amount.`;
 
     // Encode and Open WhatsApp
-    const whatsappUrl = `https://wa.me/919874112489?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/917980649815?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, "_blank");
 
     // Optionally close modal or clear cart here if desired
@@ -162,7 +162,7 @@ export function CheckoutModal({
                     type="tel"
                     value={formData.contact}
                     onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
-                    placeholder="+91 98741 12489"
+                    placeholder="+91 79806 49815"
                     className={cn("w-full bg-white border p-3 rounded-sm focus:outline-none focus:border-obsidian focus:ring-1 focus:ring-obsidian/10 transition-all font-serif", showRedPlaceholders && !formData.contact.trim() ? "border-red-600 placeholder:text-red-600" : "border-obsidian/20")}
                   />
                 </div>

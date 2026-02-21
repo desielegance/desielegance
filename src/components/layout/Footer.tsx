@@ -84,11 +84,11 @@ export function Footer() {
             <div className="space-y-4 text-ivory/80 font-light text-lg">
               <div className="flex items-center gap-3">
                 <PhoneCall size={20} className="text-ivory/60" />
-                <p>+91 9874112489</p>
+                <p>+91 7980649815</p>
               </div>
               <div className="flex items-center gap-3">
                 <PhoneCall size={20} className="text-ivory/60" />
-                <p>+91 7439505161</p>
+                <p>+91 9874112489</p>
               </div>
               <div className="flex items-center gap-3">
                 <Mail size={20} className="text-ivory/60" />
